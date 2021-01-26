@@ -1,0 +1,27 @@
+---
+title: "Homework 6 - Graphs"
+author: "Nicolas Solomita"
+date: "30/4/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Exercise 3
+
+Let's compare two implementations of the Dijkstra Algorithm which differ in the type of the queue (array vs heap). 
+
+We are testing the procedure on random graphs from $n=2^1$ to $n=2^{12}$.
+```{r, echo=F}
+dijkstra_array <- c(0.000001,0.000001,0.000005,0.000005,0.000010,0.000028,0.000078,0.000284,0.001131,0.004411,0.018745,0.088943)
+dijkstra_heaps <- c(0.000001,0.000001,0.000002,0.000008,0.000020,0.000047,0.000099,0.000315,0.000940,0.003425,0.014127,0.061005)
+size <- c(2^1, 2^2, 2^3, 2^4, 2^5, 2^6, 2^7, 2^8, 2^9, 2^10, 2^11, 2^12)
+plot(size, dijkstra_array, type="l", col="blue", ylab="time(s)", xlab="n", xaxt = "n")
+axis(1, at=seq(2^1, 2^12, (2^12-2^1)/11), 
+   labels= c("2^1","2^2","2^3","2^4","2^5","2^6","2^7","2^8","2^9","2^10","2^11","2^12"))
+lines(size, dijkstra_heaps, col="red")
+legend(0, 0.08, legend=c("dijkstra_array", "dijkstra_heaps"),
+       col=c("blue", "red"), lty=1, cex=0.8)
+```

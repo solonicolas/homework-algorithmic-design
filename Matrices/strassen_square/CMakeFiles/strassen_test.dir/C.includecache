@@ -1,0 +1,42 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/solonicolas/Desktop/Homework - Solomita Nicolas/Matrices/strassen_square/main.c
+stdio.h
+-
+test.h
+/Users/solonicolas/Desktop/Homework - Solomita Nicolas/Matrices/strassen_square/test.h
+matrix.h
+/Users/solonicolas/Desktop/Homework - Solomita Nicolas/Matrices/strassen_square/matrix.h
+strassen.h
+/Users/solonicolas/Desktop/Homework - Solomita Nicolas/Matrices/strassen_square/strassen.h
+
+/Users/solonicolas/Desktop/Homework - Solomita Nicolas/Matrices/strassen_square/matrix.c
+stdio.h
+-
+stdlib.h
+-
+matrix.h
+/Users/solonicolas/Desktop/Homework - Solomita Nicolas/Matrices/strassen_square/matrix.h
+
+/Users/solonicolas/Desktop/Homework - Solomita Nicolas/Matrices/strassen_square/matrix.h
+stdlib.h
+-
+
+/Users/solonicolas/Desktop/Homework - Solomita Nicolas/Matrices/strassen_square/strassen.c
+matrix.h
+/Users/solonicolas/Desktop/Homework - Solomita Nicolas/Matrices/strassen_square/matrix.h
+
+/Users/solonicolas/Desktop/Homework - Solomita Nicolas/Matrices/strassen_square/strassen.h
+
+/Users/solonicolas/Desktop/Homework - Solomita Nicolas/Matrices/strassen_square/test.c
+time.h
+-
+
+/Users/solonicolas/Desktop/Homework - Solomita Nicolas/Matrices/strassen_square/test.h
+

@@ -1,0 +1,101 @@
+---
+title: "Homework 2/3 - Heaps"
+author: "Nicolas Solomita"
+date: "17/3/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Homework 2
+
+### Exercise 3
+Let's compare the results of the `test_delete_min` program using Arrays or the two implementations of the Binary Heap.
+
+```{r, echo=F, fig.dim = c(12, 6)}
+array <- c(0.000011,0.306677,1.233898,2.739120,4.950361,7.785841,12.156297,15.628335,22.234650,27.068139)
+basic_heaps <- c(0.000042,0.164049,0.331057,0.521760,0.755442,0.886381,1.181291,1.461549,1.724333,1.857339)
+improved_heaps <- c(0.000055,0.028009,0.052145,0.076623,0.100853,0.125323,0.145485,0.167028,0.187585,0.210796)
+
+size <- c(0, 1820, 3640, 5461, 7281, 9102, 10922, 12743, 14563, 16384)
+
+par(mfrow=c(1,3))
+plot(size, array, type="l", col="blue", xlab="n",  ylab="time(s)")
+title("Arrays")
+plot(size, basic_heaps, type="l", col="blue", xlab="n",  ylab="time(s)")
+title("Basic Heaps")
+plot(size, improved_heaps, type="l", col="blue", xlab="n",  ylab="time(s)")
+title("Improved Heaps")
+```
+
+### Exercise 4
+Show that, with the array representation, the leaves of a binary heap containing $n$ nodes are indexed by $\lfloor \frac{n}{2} \rfloor + 1$, $\lfloor \frac{n}{2} \rfloor + 2$, . . . $n$.
+
+__Proof__
+
+- The last leaf has index $n$
+- The parent of the last leaf has index $\lfloor \frac{n}{2} \rfloor$
+- There is no element $x$ s.t. parent(x) has index $\lfloor \frac{n}{2} \rfloor + 1$
+- Thus, the leaves are indexed from $\lfloor \frac{n}{2} \rfloor + 1$ to $n$
+
+### Exercise 5
+Show that the worst-case running time of HEAPIFY on a binary heap of size n is $\Omega(log n)$. (Hint: For a heap with $n$ nodes, give node values that cause HEAPIFY to be called recursively at every node on a simple path from the root down to a leaf.)
+
+__Proof__
+
+We are showing the proof for a min-heap, but it could be rephrased for any type of heap.
+
+Let a min-heap with $n$ node has the maximum value in the root. If we now call HEAPIFY, we have the worst-case scenario because the procedure will be called at every node on a simple path from the root to a leaf. We know that the heap has height $\Theta(log n)$, therefore the procedure will have a complexity of $\Omega(log n)$.
+
+### Exercise 6
+Show that there are at most $\Big\lceil \frac{n}{2^{h +1}} \Big\rceil$ nodes of height $h$ in any $n$-element binary heap.
+
+__Proof__
+
+Let $h$ be the height of the heap and $n(h)$ be the number of nodes at height h. Let's make the proof by induction:
+
+__Base case__: Let's consider the root. We have $h=\lfloor log n \rfloor$. Therefore, 
+$$
+n(h)=n(\lfloor log n \rfloor)=\Big\lceil \frac{n}{2^{\lfloor log n \rfloor +1}} \Big\rceil=1
+$$
+This is true because $\frac{n}{2^{\lfloor log n \rfloor +1}}$ is positive and the denominator $2^{\lfloor log n \rfloor +1} > 2^{log n} = n$.
+
+__Inductive step__: Let's assume that $n(i) =  \Big\lceil \frac{n}{2^{i +1}} \Big\rceil$ with $h=i$. Thus,
+
+$$
+n(i-1) \leq 2n(i) = 2\Big\lceil \frac{n}{2^{i +1}} \Big\rceil \leq \Big\lceil \frac{n}{2^i} \Big\rceil
+$$
+This is true because each node has at most 2 children and because $2\lceil x \rceil \leq \lceil 2x \rceil$.
+
+# Homework 3
+
+### Exercise 2
+Consider the next algorithm:
+```{r, tidy=FALSE, eval=FALSE, highlight=FALSE }
+1 def Ex2(A)
+2   D <- build(A)
+3   while not is_empty(D)
+4     extract_min(D)
+5   endwhile
+6 enddef
+```
+
+where $A$ is an array. Compute the time-complexity of the algorithm when:
+
+__1.__ build, is_empty $\in \Theta(1)$, extract_min $\in \Theta(|D|)$
+
+- Line 2: $\Theta(1)$
+- Line 3: $\Theta(1) * |D| = \Theta(|D|)$
+- Line 4: $\sum_{i=0}^{|D|}\Theta(i) = \Theta(|D|^2)$
+
+$T_1(n) \in \Theta(n^2)$
+
+__2.__ build $\in \Theta(|A|)$, is_empty $\in \Theta(1)$, extract_min $\in O(log |D|)$;
+
+- Line 2: $\Theta(1)$
+- Line 3: $\Theta(1) * |D| = \Theta(|D|)$
+- Line 4: $\sum_{i=0}^{|D|}O(log(i)) = O(log|D|!) \approx |D|*log(|D|-1)$
+
+$T_2(n) \in O(nlog(n))$

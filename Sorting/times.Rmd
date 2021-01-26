@@ -1,0 +1,50 @@
+---
+title: "Homework 4/5 - Sorting"
+author: "Nicolas Solomita"
+date: "31/3/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Let's compare the different sorting algorithms applyed on sizes going from $2^2$ to $2^{13}$.
+```{r, echo = F}
+insertion_sort <- c(0.000001,0.000001,0.000006,0.000023,0.000089,0.000350,0.001401,0.005577, 0.022346,0.088890,0.354780,1.423707)
+quick_sort <- c(0.000001,0.000002,0.000005,0.000010,0.000023,0.000056,0.000128,0.000278,0.000595,0.001347,0.002710,0.005686)
+bubble_sort <-  c(0.000001,0.000001,0.000007,0.000023,0.000098,0.000397,0.001706,0.007351,0.033005,0.147866,0.640717,2.692697)
+selection_sort <- c(0.000001,0.000002,0.000003,0.000005,0.000014,0.000041,0.000137,0.000489,0.001845,0.007105,0.027877,0.111241)
+heap_sort <-  c(0.000001,0.000003,0.000008,0.000015,0.000032,0.000074,0.000169,0.000382,0.000858,0.001889,0.004154,0.009063)
+quick_sort_select <-  c(0.000001,0.000002,0.000011,0.000033,0.000099,0.000272,0.000686,0.001650,0.003656,0.007754,0.015447,0.031117)
+
+size <- c(2^2, 2^3, 2^4, 2^5, 2^6, 2^7, 2^8, 2^9, 2^10, 2^11, 2^12, 2^13)
+plot(size, insertion_sort, type="l", col="black", log="y", ylab="log(time)", xlab="n", xaxt = "n")
+axis(1, at=seq(2^2, 2^13, (2^13-2^2)/11), 
+   labels= c("2^2","2^3","2^4","2^5","2^6","2^7","2^8","2^9","2^10","2^11","2^12","2^13"))
+lines(size, quick_sort, col="red")
+lines(size, bubble_sort, col="blue")
+lines(size, selection_sort, col="green")
+lines(size, heap_sort, col="orange")
+lines(size, quick_sort_select, col="pink")
+legend(6000, 0.001, legend=c("insertion sort", "quick sort","bubble sort", "selection sort", "heap_sort", "quick sort select"),
+       col=c("black", "red", "blue", "green", "orange", "pink"), lty=1, cex=0.8)
+```
+
+And now let's compare the three best sorting algorithms on sizes going from $2^{14}$ to $2^{20}$.
+```{r, echo = F}
+quick_sort_big <- c(0.012147,0.026362,0.058330,0.144066,0.406347,1.235783,4.262251)
+quick_sort_select_big <- c(0.060542,0.116975,0.230238,0.459159,0.886102,1.746197,3.477124)
+heap_sort_big <-  c(0.019509,0.041897,0.089473,0.190889,0.405276,0.876056,1.819107)
+
+size <- c(2^14,2^15,2^16,2^17,2^18,2^19,2^20)
+plot(size, quick_sort_big, type="l", col="black", ylab="time", xlab="n", xaxt = "n")
+axis(1, at=seq(2^14, 2^20, (2^20-2^14)/6), 
+   labels= c("2^14","2^15","2^16","2^17","2^18","2^19","2^20"))
+lines(size, quick_sort_select_big, col="red")
+lines(size, heap_sort_big, col="blue")
+legend(100000, 4, legend=c("quick sort", "quick sort select", "heap_sort"),
+       col=c("black", "red", "blue"), lty=1, cex=0.8)
+```
+
+As we can observe, `heap_sort` is the best alghoritm that sorts a randomly generated array. the basic implementation of `quick-sort` is the best choice for $n < 2^{18}$, but then the new implementation of the `quick-sort-select` wins.

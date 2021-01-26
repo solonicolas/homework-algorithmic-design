@@ -1,0 +1,28 @@
+---
+title: "Homework 1 - Matrix Multiplication"
+author: "Nicolas Solomita"
+date: "12/3/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+### Exercise 2
+Let's compare two implementations of the Strassen Algorithm which differ in the memory usage. 
+
+We are testing multiplications on square matrices from $n=2^0$ to $n=2^{12}$.
+
+```{r, echo=F}
+
+old_algorithm <- c(0.000001,0.000001,0.000002,0.000006,0.000017,0.000066,0.000414,0.002159,0.019962,0.105758,0.710444,5.308931,37.202009)
+memory_improvements <- c(0.000003,0.000002,0.000003,0.000007,0.000017,0.000088,0.000327,0.001693,0.013034,0.085014,0.555193,3.966877,28.545225)
+
+size <- c(2^0, 2^1, 2^2, 2^3, 2^4, 2^5, 2^6, 2^7, 2^8, 2^9, 2^10, 2^11, 2^12)
+plot(size, old_algorithm, type="l", col="blue", xlab="n", ylab="time (s)", xaxt = "n")
+axis(1, at=seq(2^0, 2^12, (2^12-2^0)/12), 
+   labels= c("2^0","2^1","2^2","2^3","2^4","2^5","2^6","2^7","2^8","2^9","2^10","2^11","2^12"))
+lines(size, memory_improvements, col="red")
+legend(1, 20, legend=c("Original algorithm", "Memory improvements"),
+       col=c("blue", "red"), lty=1, cex=0.8)
+```

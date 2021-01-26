@@ -1,0 +1,3 @@
+/Users/solonicolas/Desktop/Homework - Solomita Nicolas/Matrices/strassen_square/CMakeFiles/rebuild_cache.dir
+/Users/solonicolas/Desktop/Homework - Solomita Nicolas/Matrices/strassen_square/CMakeFiles/edit_cache.dir
+/Users/solonicolas/Desktop/Homework - Solomita Nicolas/Matrices/strassen_square/CMakeFiles/strassen_test.dir
